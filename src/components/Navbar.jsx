@@ -7,7 +7,6 @@ import { removeUser } from "../utils/userSlice";
 
 
 const Navbar = () => {
-    //const [btnClicked,setBtnClicked]=useState(false);
     const user = useSelector((store)=>store.user);
     console.log(user)
     const dispatch = useDispatch();
@@ -20,14 +19,14 @@ const Navbar = () => {
                 {withCredentials:true});
                 dispatch(removeUser());
                 return navigate("/login");
-                //setBtnClicked(prev => !prev)
+                
         }catch(err){
             console.log(err)
         }
     }
     return (
     <div>
-        <div className="navbar bg-base-300">
+        <div className="navbar bg-base-300 ">
             <div className="flex-1">
                 <Link to="/" className="btn btn-ghost text-xl hover:bg-red-100 hover:text-black"> DevTinder</Link>
             </div>

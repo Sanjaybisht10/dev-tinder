@@ -3,7 +3,7 @@ import { BASE_URL } from "../utils/constants";
 import { useEffect } from "react";
 import { addConnection } from "../utils/connectionSlice";
 import { useDispatch, useSelector } from "react-redux";
-
+import { Link } from "react-router-dom";
 const Connections = () => {
   const connectionUser = useSelector((store)=>store.connection);
   const dispatch = useDispatch();
@@ -14,7 +14,6 @@ const Connections = () => {
         withCredentials:true,
       });
       dispatch(addConnection(res?.data?.data))
-      console.log("connection data",res.data?.data);
     }catch(err){
       console.log(err)
     }
@@ -37,7 +36,7 @@ const Connections = () => {
           return(
             <div
             key={_id}
-            className="flex m-4 p-4 rounded-lg bg-base-300 w-1/2 mx-auto"
+            className="flex  m-4 p-4 rounded-lg bg-base-300 w-1/2 mx-auto"
           >
             <div>
               <img
@@ -53,9 +52,9 @@ const Connections = () => {
               {age && gender && <p>{age + ", " + gender}</p>}
               <p>{about}</p>
             </div>
-            {/* <Link to={"/chat/" + _id}>
-              <button className="btn btn-primary">Chat</button>
-            </Link> */}
+            <Link to={"/chat/" + _id}>
+              <button className="btn btn-outline btn-secondary">Chat</button>
+            </Link> 
           </div>
           )
         })

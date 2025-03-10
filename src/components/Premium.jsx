@@ -1,7 +1,23 @@
 import axios from "axios";
 import { BASE_URL } from "../utils/constants";
+import { useEffect } from "react";
+import { useState } from "react";
 
 const Premium = () => {
+  const [isUserPremium, setIsUserPremium] = useState(false);
+  useEffect(() => {
+    verifyPremiumUser();
+  }, []);
+
+  const verifyPremiumUser = async () => {
+    const res = await axios.get(BASE_URL + "/premium/verify", {
+      withCredentials: true,
+    });
+
+    if (res.data.isPremium) {
+      setIsUserPremium(true);
+    }
+  };
 
     const handleBuyClick = async(type)=>{
         try{
@@ -27,7 +43,7 @@ const Premium = () => {
               theme: {
                 color: "#F37254",
               },
-            //   handler: verifyPremiumUser,
+                handler: verifyPremiumUser,
             };
         
             const rzp = new window.Razorpay(options);
@@ -37,7 +53,7 @@ const Premium = () => {
         }
         
     }
-  return (
+  return isUserPremium ? ( "You are already a Premium User") :(
     <div className="m-20">
     <div className="flex w-full flex-col lg:flex-row">
     <div className="card bg-red-200 rounded-box grid h-80 flex-grow place-items-center">
@@ -63,7 +79,7 @@ const Premium = () => {
           </ul>
     <button
     onClick={()=>handleBuyClick("Gold")}
-     className="btn btn-outline btn-secondary">Buy Now</button>
+    className="btn btn-outline btn-secondary">Buy Now</button>
     </div>
   </div>
     </div>
