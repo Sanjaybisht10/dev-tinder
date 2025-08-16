@@ -38,7 +38,8 @@ initializeSocket(server);
 
 connectDb().then(()=>{
     console.log("Database connection successfully.....")
-    server.listen(process.env.PORT,()=>{
+    const PORT = process.env.PORT || 5000; 
+    server.listen(PORT,'0.0.0.0',()=>{
         console.log("sever is running on port no : ",process.env.PORT)
     });
 }).catch((err)=>{
