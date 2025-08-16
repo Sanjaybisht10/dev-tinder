@@ -40,7 +40,7 @@ connectDb().then(()=>{
     console.log("Database connection successfully.....")
     const PORT = process.env.PORT || 5000; 
     server.listen(PORT,'0.0.0.0',()=>{
-        console.log("sever is running on port no : ",process.env.PORT)
+        console.log("sever is running on port no : ",PORT)
     });
 }).catch((err)=>{
     console.log("connection not connected",err)
